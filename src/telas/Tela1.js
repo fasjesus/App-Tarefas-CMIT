@@ -29,18 +29,19 @@ const Tela1 = ({ adicionarTarefa }) => {
   };
 
   const handleConcluidoPress = () => {
-    // Atualize o objeto dadosTarefa com as informações dos inputs
-    setDadosTarefa({
+    const categoriaSelecionada = Object.keys(categorias).find((categoria) => categorias[categoria]);
+  
+    const tarefa = {
       nome: dadosTarefa.nome,
       descricao: dadosTarefa.descricao,
       prazo: dadosTarefa.prazo,
-    });
-    adicionarTarefa(dadosTarefa.nome);
-
-    
-    navigation.navigate('Tela2', { dadosTarefa });
+      categoria: categoriaSelecionada,
+    };
+  
+    adicionarTarefa(tarefa);
+    navigation.navigate('Tela2', { dadosTarefa: tarefa });
   };
-
+  
   const navigateToPerfil = () => {
     navigation.navigate('TelaAccount');
   };
@@ -49,12 +50,12 @@ const Tela1 = ({ adicionarTarefa }) => {
   return (
     <View style={styles.container}>
       <View style={styles.background}>
-        <TouchableOpacity style={[styles.botao, {backgroundColor: 'gray', borderColor: 'white', borderWidth: 1}]} onPress={navigateToPerfil}>
-          <Text style={[styles.botaoTexto, {color: 'white', fontWeight: '900'}]}>Minha Conta</Text>
+        <TouchableOpacity style={[styles.botao,{backgroundColor: 'gray', borderColor: 'white', borderWidth: 1}]} onPress={navigateToPerfil}>
+          <Text style={[styles.botaoTexto,{color:'white'}]}>Minha Conta</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.botao} >
-          <Text style={[styles.botaoTexto, {color: '#FFFFFF', fontWeight: '900'}]}>CRIAR TAREFA</Text>
+          <Text style={[styles.botaoTexto,{color:'white'}]}>CRIAR TAREFA</Text>
         </TouchableOpacity>
 
         <View style={styles.retangulo}>
@@ -80,7 +81,7 @@ const Tela1 = ({ adicionarTarefa }) => {
           />
         </View>
 
-        <Text style={[styles.categoriasText, {color: 'white'}]}>Categorias:</Text>
+        <Text style={[styles.categoriasText,{color:'white'}]}>Categorias</Text>
 
         <TouchableOpacity
           style={[
@@ -149,7 +150,7 @@ const Tela1 = ({ adicionarTarefa }) => {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.Concluido} onPress={handleConcluidoPress}>
-          <Text style={[styles.botaoTexto, {color: 'white'}]}>Concluído</Text>
+          <Text style={[styles.botaoTexto,{color : 'white'}]}>Concluído</Text>
         </TouchableOpacity>
         </View>
     </View>
@@ -336,5 +337,6 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
 });
+
 
 export default Tela1;

@@ -27,17 +27,29 @@ const Tela2 = ({ tarefas, setTarefas }) => {
   const navigateToTela1 = () => {
     navigation.navigate('Tela1');
   };
+  const navigateToTelaDescricao = (tarefa) => {
+    navigation.navigate('TelaDescricao', {
+      nome: tarefa.nome,
+      descricao: tarefa.descricao,
+      prazo: tarefa.prazo,
+      categoria: tarefa.categoria, // Certifique-se de incluir a categoria aqui
+    });
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.background}>
         <TouchableOpacity style={styles.botao} onPress={navigateToTela1}>
-          <Text style={[styles.botaoTexto, {color: 'white'}]}>TAREFAS</Text>
+          <Text style={styles.botaoTexto}>TAREFAS</Text>
         </TouchableOpacity>
 
         <ScrollView contentContainerStyle={styles.tarefasContainer}>
           {tarefas.map((tarefa, index) => (
-            <View key={index} style={styles.tarefaContainer}>
+            <TouchableOpacity
+              key={index}
+              onPress={() => navigateToTelaDescricao(tarefa)}
+              style={styles.tarefaContainer}
+            >
               <CheckBox
                 checked={tarefasConcluidas[index] || false}
                 onPress={() => toggleConcluida(index)}
@@ -49,7 +61,7 @@ const Tela2 = ({ tarefas, setTarefas }) => {
               <TouchableOpacity onPress={() => handleExcluirTarefa(index)} style={styles.excluirBotao}>
                 <Text style={styles.excluirTexto}>Excluir</Text>
               </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
 

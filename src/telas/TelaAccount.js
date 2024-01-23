@@ -12,7 +12,13 @@ const YourComponent = () => {
   const handleAdicionarTarefasPress = () => {
     navigation.navigate('Tela1'); 
   };
+  const handleTarefasConcluidasPress = () => {
+    navigation.navigate('TelaConcluidas');
+  };
 
+  const handleCardPress = () => {
+    navigation.navigate('Tela2');
+  };
   return (
     <View style={styles.container}>
       {/* Avatar do usuário */}
@@ -25,12 +31,12 @@ const YourComponent = () => {
       <Text style={styles.userName}>Miau</Text>
       <View style={styles.row}>
         {/* Card 1 */}
-        <View style={[styles.card, { backgroundColor: '#73C5BF' }]}>
+        <TouchableOpacity style={[styles.card, { backgroundColor: '#73C5BF' }]}onPress={handleCardPress}>
           {/* Conteúdo do Card 1 */}
           <Text style={styles.cardText}>10</Text>
           <Text style={styles.cardTextSub}>Cadastradas</Text>
           <Text style={styles.cardTextSubSub}>10 tarefas hoje</Text>
-        </View>
+        </TouchableOpacity>
 
         {/* Card 2 */}
         <View style={[styles.card, { backgroundColor: '#E37387' }]}>
@@ -51,12 +57,12 @@ const YourComponent = () => {
         </View>
 
         {/* Card 4 */}
-        <View style={[styles.card, { backgroundColor: '#6BC785' }]}>
+        <TouchableOpacity style={[styles.card, { backgroundColor: '#6BC785' }]} onPress={handleTarefasConcluidasPress}>
           {/* Conteúdo do Card 4 */}
           <Text style={styles.cardText}>70%</Text>
           <Text style={styles.cardTextSub}>Concluídas</Text>
           <Text style={styles.cardTextSubSub}>07 tarefas concluídas</Text>
-        </View>
+        </TouchableOpacity>
       </View>
       
       {/* Botão "Ver Tarefas" */}
