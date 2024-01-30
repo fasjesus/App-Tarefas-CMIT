@@ -1,22 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { CheckBox } from 'react-native-elements';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 const Tela2 = ({ tarefas, setTarefas }) => {
-  const [tarefasConcluidas, setTarefasConcluidas] = React.useState([]);
+  const [tarefasConcluidas, setTarefasConcluidas] = useState([]);
   const navigation = useNavigation();
 
-  const toggleConcluida = (index) => {
-    const novasConcluidas = [...tarefasConcluidas];
-    novasConcluidas[index] = !novasConcluidas[index];
+  useEffect(() => {
+    // Recupere as tarefas concluídas do AsyncStorage ao carregar a tela
+    const recuperarTarefa = async () => {
+      try {
+        const tarefasConcluidasData = await AsyncStorage.getItem('tarefasConcluidas');
+        if (tarefasConcluidasData) {
+          setTarefasConcluidas(JSON.parse(tarefasConcluidasData));
+        }
+      } catch (error) {
+        console.error('Erro ao obter tarefas concluídas do AsyncStorage:', error);
+      }
+    };
+
+    recuperarTarefa();
+  }, []);
+
+  const toggleConcluida = async (index) => {
+    const tarefaConcluida = tarefas[index];
+
+    const novasTarefas = tarefas.filter((_, i) => i !== index);
+    setTarefas(novasTarefas);
+
+    const novasConcluidas = [...tarefasConcluidas, tarefaConcluida];
     setTarefasConcluidas(novasConcluidas);
+
+    await AsyncStorage.setItem('tarefas', JSON.stringify(novasTarefas));
+    await AsyncStorage.setItem('tarefasConcluidas', JSON.stringify(novasConcluidas));
   };
 
+
+  
   const handleExcluirTarefa = (index) => {
     const novasTarefas = [...tarefas];
     novasTarefas.splice(index, 1);
+    
+    // Atualize o estado local
     setTarefas(novasTarefas);
+
     setTarefasConcluidas((prevConcluidas) => {
       const novasConcluidas = [...prevConcluidas];
       novasConcluidas.splice(index, 1);
@@ -27,13 +56,17 @@ const Tela2 = ({ tarefas, setTarefas }) => {
   const navigateToTela1 = () => {
     navigation.navigate('Tela1');
   };
-  const navigateToTelaDescricao = (tarefa) => {
-    navigation.navigate('TelaDescricao', {
-      nome: tarefa.nome,
-      descricao: tarefa.descricao,
-      prazo: tarefa.prazo,
-      categoria: tarefa.categoria, // Certifique-se de incluir a categoria aqui
-    });
+
+  const navigateToTelaDescricao = async (tarefa) => {
+    try {
+      // Salvando os dados da tarefa no AsyncStorage antes de navegar para TelaDescricao
+      await AsyncStorage.setItem('tarefaSelecionada', JSON.stringify(tarefa));
+      
+      // Navegando para a TelaDescricao
+      navigation.navigate('TelaDescricao');
+    } catch (error) {
+      console.error('Erro ao salvar tarefa selecionada no AsyncStorage:', error);
+    }
   };
 
   return (
@@ -51,7 +84,7 @@ const Tela2 = ({ tarefas, setTarefas }) => {
               style={styles.tarefaContainer}
             >
               <CheckBox
-                checked={tarefasConcluidas[index] || false}
+                checked={false} // Inicializando como desativada
                 onPress={() => toggleConcluida(index)}
                 containerStyle={styles.checkboxContainer}
               />

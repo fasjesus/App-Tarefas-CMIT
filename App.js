@@ -24,7 +24,14 @@ const App = () => {
         <Stack.Screen name="Tela2" component={() => <Tela2 tarefas={tarefas} setTarefas={setTarefas} />} />
         <Stack.Screen name="TelaAccount" component={TelaAccount} />
         <Stack.Screen name="TelaDescricao" component={TelaDescricao} />
-        <Stack.Screen name="TelaConcluidas" component={TelaConcluidas} />  
+        <Stack.Screen
+          name="TelaConcluidas"
+          component={TelaConcluidas}
+          options={{
+            headerShown: false,
+  }}
+/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );

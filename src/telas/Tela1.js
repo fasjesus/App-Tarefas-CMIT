@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, StatusBar } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 const Tela1 = ({ adicionarTarefa }) => {
@@ -16,7 +17,6 @@ const Tela1 = ({ adicionarTarefa }) => {
     nome: '',
     descricao: '',
     prazo: '',
-    // Adicione outros campos conforme necessário
   });
 
   const navigation = useNavigation();
@@ -28,7 +28,7 @@ const Tela1 = ({ adicionarTarefa }) => {
     }));
   };
 
-  const handleConcluidoPress = () => {
+  const handleConcluidoPress = async () => {
     const categoriaSelecionada = Object.keys(categorias).find((categoria) => categorias[categoria]);
   
     const tarefa = {
@@ -37,9 +37,16 @@ const Tela1 = ({ adicionarTarefa }) => {
       prazo: dadosTarefa.prazo,
       categoria: categoriaSelecionada,
     };
-  
-    adicionarTarefa(tarefa);
-    navigation.navigate('Tela2', { dadosTarefa: tarefa });
+
+    try {
+      await AsyncStorage.setItem('tarefa', JSON.stringify(tarefa));
+
+      adicionarTarefa(tarefa);
+
+      navigation.navigate('Tela2');
+    } catch (error) {
+      console.error('Erro ao salvar tarefa no AsyncStorage:', error);
+    }
   };
   
   const navigateToPerfil = () => {
@@ -54,7 +61,7 @@ const Tela1 = ({ adicionarTarefa }) => {
           <Text style={[styles.botaoTexto,{color:'white'}]}>Minha Conta</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.botao} >
+        <TouchableOpacity style={[styles.botao,{backgroundColor: '#73C5BF'}]} >
           <Text style={[styles.botaoTexto,{color:'white'}]}>CRIAR TAREFA</Text>
         </TouchableOpacity>
 
@@ -322,8 +329,8 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   Concluido: {
-    width: 150,
-    height: 44,
+    width: 140,
+    height: 48,
     flexShrink: 0,
     backgroundColor: '#6BC785',
     borderRadius: 30,
