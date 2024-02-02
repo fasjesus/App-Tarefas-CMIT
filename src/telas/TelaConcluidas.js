@@ -52,7 +52,7 @@ const TelaConcluidas = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.botao} onPress={handleVoltarPress}>
+      <TouchableOpacity style={[styles.botao, {backgroundColor: "#6BC785"}]} onPress={handleVoltarPress}>
         <Text style={styles.botaoTexto}>Concluídas</Text>
       </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.tarefasContainer}>
@@ -97,10 +97,10 @@ const styles = StyleSheet.create({
   tarefaContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 1,
     width: 394,
     height: 61,
-    marginTop: 14,
+    marginTop: 5,
   },
   checkboxContainer: {
     marginRight: 10,
@@ -136,7 +136,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 4,
     elevation: 4,
-    marginTop: 15,
+    marginTop: 30,
+    marginVertical: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },

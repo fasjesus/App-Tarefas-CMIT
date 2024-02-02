@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     botao: {
-      width: '80%',
-      height: 50,
+      width: 309,
+      height: 60,
       borderRadius: 15,
       backgroundColor: '#73C5BF',
       shadowColor: 'rgba(0, 0, 0, 0.25)',
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
       shadowOpacity: 1,
       shadowRadius: 4,
       elevation: 4,
-      marginTop: 15,
+      marginTop: 30,
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     nomeBox: {
       width: 300,
       height: 50,
-      borderRadius: 4,
+      borderRadius: 15,
       borderWidth: 1,
       borderColor: '#73C5BF',
       backgroundColor: '#FFF',
@@ -131,8 +131,8 @@ const styles = StyleSheet.create({
     },
     descricaoBox: {
       width: 300,
-      height: 197,
-      borderRadius: 4,
+      height: 150,
+      borderRadius: 15,
       borderWidth: 1,
       borderColor: '#73C5BF',
       backgroundColor: '#FFF',
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     prazoBox: {
       width: 300,
       height: 50,
-      borderRadius: 4,
+      borderRadius: 15,
       borderWidth: 1,
       borderColor: '#73C5BF',
       backgroundColor: '#FFF',
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     categoriaBox: {
       width: 150,
       height: 50,
-      borderRadius: 30,
+      borderRadius: 20,
       borderWidth: 1,
       borderColor: '#73C5BF',
       backgroundColor: '#FFF',
@@ -161,11 +161,11 @@ const styles = StyleSheet.create({
       marginBottom: 10,
     },
     valor: {
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: '100',
     },
     categoria: {
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: 'bold',
       marginBottom: 10,
       alignItems: 'center',
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     voltarBotao: {
       width: 150,
       height: 50,
-      borderRadius: 15,
+      borderRadius: 25,
       backgroundColor: '#73C5BF',
       justifyContent: 'center',
       alignItems: 'center',

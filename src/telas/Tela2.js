@@ -9,7 +9,7 @@ const Tela2 = ({ tarefas, setTarefas }) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // Recupere as tarefas concluídas do AsyncStorage ao carregar a tela
+    // Recuperando as tarefas concluídas do AsyncStorage 
     const recuperarTarefa = async () => {
       try {
         const tarefasConcluidasData = await AsyncStorage.getItem('tarefasConcluidas');
@@ -43,7 +43,7 @@ const Tela2 = ({ tarefas, setTarefas }) => {
     const novasTarefas = [...tarefas];
     novasTarefas.splice(index, 1);
     
-    // Atualize o estado local
+    // Atualizando o estado local
     setTarefas(novasTarefas);
 
     setTarefasConcluidas((prevConcluidas) => {
@@ -73,7 +73,7 @@ const Tela2 = ({ tarefas, setTarefas }) => {
     <View style={styles.container}>
       <View style={styles.background}>
         <TouchableOpacity style={styles.botao} onPress={navigateToTela1}>
-          <Text style={styles.botaoTexto}>TAREFAS</Text>
+          <Text style={[styles.botaoTexto, {fontWeight: "900", color: "white", fontSize: 18}]}>TAREFAS</Text>
         </TouchableOpacity>
 
         <ScrollView contentContainerStyle={styles.tarefasContainer}>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   botao: {
     width: 309,
-    height: 60,
+    height: 50,
     borderRadius: 15,
     backgroundColor: '#73C5BF',
     shadowColor: 'rgba(0, 0, 0, 0.25)',
@@ -128,17 +128,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 4,
     elevation: 4,
-    marginTop: 15,
+    marginTop: 30,
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: 30,
   },
   tarefaContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 5,
     width: 394,
     height: 61,
-    marginTop: 14,
   },
   checkboxContainer: {
     marginRight: 10,
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6F6F1',
     borderRadius: 8,
     padding: 10,
-
+    
   },
   tarefaTexto: {
     fontSize: 16,
